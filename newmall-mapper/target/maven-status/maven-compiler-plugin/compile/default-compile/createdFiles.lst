@@ -1,0 +1,14 @@
+com\newmall\mapper\OrderStatusMapper.class
+com\newmall\my\mapper\MyMapper.class
+com\newmall\mapper\ItemsImgMapper.class
+com\newmall\mapper\UsersMapper.class
+com\newmall\mapper\ItemsCommentsMapper.class
+com\newmall\mapper\ItemsParamMapper.class
+com\newmall\mapper\StuMapper.class
+com\newmall\mapper\ItemsMapper.class
+com\newmall\mapper\OrderItemsMapper.class
+com\newmall\mapper\ItemsSpecMapper.class
+com\newmall\mapper\OrdersMapper.class
+com\newmall\mapper\CarouselMapper.class
+com\newmall\mapper\CategoryMapper.class
+com\newmall\mapper\UserAddressMapper.class

@@ -1,0 +1,13 @@
+com\newmall\pojo\ItemsComments.class
+com\newmall\pojo\Stu.class
+com\newmall\pojo\Category.class
+com\newmall\pojo\Orders.class
+com\newmall\pojo\OrderItems.class
+com\newmall\pojo\Users.class
+com\newmall\pojo\ItemsParam.class
+com\newmall\pojo\Carousel.class
+com\newmall\pojo\Items.class
+com\newmall\pojo\OrderStatus.class
+com\newmall\pojo\UserAddress.class
+com\newmall\pojo\ItemsImg.class
+com\newmall\pojo\ItemsSpec.class
