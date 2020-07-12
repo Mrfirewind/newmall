@@ -1,4 +1,4 @@
-package com.newmall.service.imple;
+package com.newmall.service.impl;
 
 import com.newmall.mapper.StuMapper;
 import com.newmall.pojo.Stu;
