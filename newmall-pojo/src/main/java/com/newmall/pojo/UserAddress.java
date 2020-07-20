@@ -1,156 +1,199 @@
 package com.newmall.pojo;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "user_address")
 public class UserAddress {
-    @Id
-    private Integer id;
-
     /**
-     * 收获人姓名
+     * 地址主键id
      */
-    private String name;
+    @Id
+    private String id;
 
     /**
-     * 手机号
+     * 关联用户id
+     */
+    @Column(name = "user_id")
+    private String userId;
+
+    /**
+     * 收件人姓名
+     */
+    private String receiver;
+
+    /**
+     * 收件人手机号
      */
     private String mobile;
 
     /**
-     * 省
+     * 省份
      */
     private String province;
 
     /**
-     * 市
+     * 城市
      */
     private String city;
 
     /**
-     * 区
+     * 区县
      */
-    private String country;
+    private String district;
 
     /**
      * 详细地址
      */
     private String detail;
 
-    @Column(name = "delete_time")
-    private Integer deleteTime;
+    /**
+     * 扩展字段
+     */
+    private String extand;
 
     /**
-     * 外键
+     * 是否默认地址
      */
-    @Column(name = "user_id")
-    private Integer userId;
-
-    @Column(name = "update_time")
-    private Integer updateTime;
+    @Column(name = "is_default")
+    private Integer isDefault;
 
     /**
-     * @return id
+     * 创建时间
      */
-    public Integer getId() {
+    @Column(name = "created_time")
+    private Date createdTime;
+
+    /**
+     * 更新时间
+     */
+    @Column(name = "updated_time")
+    private Date updatedTime;
+
+    /**
+     * 获取地址主键id
+     *
+     * @return id - 地址主键id
+     */
+    public String getId() {
         return id;
     }
 
     /**
-     * @param id
+     * 设置地址主键id
+     *
+     * @param id 地址主键id
      */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     /**
-     * 获取收获人姓名
+     * 获取关联用户id
      *
-     * @return name - 收获人姓名
+     * @return user_id - 关联用户id
      */
-    public String getName() {
-        return name;
+    public String getUserId() {
+        return userId;
     }
 
     /**
-     * 设置收获人姓名
+     * 设置关联用户id
      *
-     * @param name 收获人姓名
+     * @param userId 关联用户id
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**
-     * 获取手机号
+     * 获取收件人姓名
      *
-     * @return mobile - 手机号
+     * @return receiver - 收件人姓名
+     */
+    public String getReceiver() {
+        return receiver;
+    }
+
+    /**
+     * 设置收件人姓名
+     *
+     * @param receiver 收件人姓名
+     */
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    /**
+     * 获取收件人手机号
+     *
+     * @return mobile - 收件人手机号
      */
     public String getMobile() {
         return mobile;
     }
 
     /**
-     * 设置手机号
+     * 设置收件人手机号
      *
-     * @param mobile 手机号
+     * @param mobile 收件人手机号
      */
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
     /**
-     * 获取省
+     * 获取省份
      *
-     * @return province - 省
+     * @return province - 省份
      */
     public String getProvince() {
         return province;
     }
 
     /**
-     * 设置省
+     * 设置省份
      *
-     * @param province 省
+     * @param province 省份
      */
     public void setProvince(String province) {
         this.province = province;
     }
 
     /**
-     * 获取市
+     * 获取城市
      *
-     * @return city - 市
+     * @return city - 城市
      */
     public String getCity() {
         return city;
     }
 
     /**
-     * 设置市
+     * 设置城市
      *
-     * @param city 市
+     * @param city 城市
      */
     public void setCity(String city) {
         this.city = city;
     }
 
     /**
-     * 获取区
+     * 获取区县
      *
-     * @return country - 区
+     * @return district - 区县
      */
-    public String getCountry() {
-        return country;
+    public String getDistrict() {
+        return district;
     }
 
     /**
-     * 设置区
+     * 设置区县
      *
-     * @param country 区
+     * @param district 区县
      */
-    public void setCountry(String country) {
-        this.country = country;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
     /**
@@ -172,48 +215,74 @@ public class UserAddress {
     }
 
     /**
-     * @return delete_time
-     */
-    public Integer getDeleteTime() {
-        return deleteTime;
-    }
-
-    /**
-     * @param deleteTime
-     */
-    public void setDeleteTime(Integer deleteTime) {
-        this.deleteTime = deleteTime;
-    }
-
-    /**
-     * 获取外键
+     * 获取扩展字段
      *
-     * @return user_id - 外键
+     * @return extand - 扩展字段
      */
-    public Integer getUserId() {
-        return userId;
+    public String getExtand() {
+        return extand;
     }
 
     /**
-     * 设置外键
+     * 设置扩展字段
      *
-     * @param userId 外键
+     * @param extand 扩展字段
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setExtand(String extand) {
+        this.extand = extand;
     }
 
     /**
-     * @return update_time
+     * 获取是否默认地址
+     *
+     * @return is_default - 是否默认地址
      */
-    public Integer getUpdateTime() {
-        return updateTime;
+    public Integer getIsDefault() {
+        return isDefault;
     }
 
     /**
-     * @param updateTime
+     * 设置是否默认地址
+     *
+     * @param isDefault 是否默认地址
      */
-    public void setUpdateTime(Integer updateTime) {
-        this.updateTime = updateTime;
+    public void setIsDefault(Integer isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return created_time - 创建时间
+     */
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param createdTime 创建时间
+     */
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    /**
+     * 获取更新时间
+     *
+     * @return updated_time - 更新时间
+     */
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    /**
+     * 设置更新时间
+     *
+     * @param updatedTime 更新时间
+     */
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 }
