@@ -3,13 +3,17 @@ package com.newmall.controller;
 import com.newmall.enums.OrderStatusEnum;
 import com.newmall.enums.PayMethod;
 import com.newmall.pojo.OrderStatus;
+import com.newmall.pojo.bo.ShopcartBO;
 import com.newmall.pojo.bo.SubmitOrderBO;
 import com.newmall.pojo.vo.MerchantOrdersVO;
 import com.newmall.pojo.vo.OrderVO;
 import com.newmall.service.OrderService;
 import com.newmall.utils.JsonResult;
+import com.newmall.utils.JsonUtils;
+import com.newmall.utils.RedisOperator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Api(value = "订单相关", tags = {"订单相关的api接口"})
 @RequestMapping("orders")
@@ -36,6 +41,9 @@ public class OrdersController extends BaseController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private RedisOperator redisOperator;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -52,8 +60,15 @@ public class OrdersController extends BaseController {
             return JsonResult.errorMsg("支付方式不支持！");
         }
 
+        String shopcartJson = redisOperator.get(FOODIE_SHOPCART + ":" + submitOrderBO.getUserId());
+        if (StringUtils.isBlank(shopcartJson)) {
+            return JsonResult.errorMsg("购物数据不正确");
+        }
+
+        List<ShopcartBO> shopcartList = JsonUtils.jsonToList(shopcartJson, ShopcartBO.class);
+
         // 1. 创建订单
-        OrderVO orderVO = orderService.createOrder(submitOrderBO);
+        OrderVO orderVO = orderService.createOrder(shopcartList,submitOrderBO);
         String orderId = orderVO.getOrderId();
 
         // 2. 创建订单以后，移除购物车中已结算（已提交）的商品

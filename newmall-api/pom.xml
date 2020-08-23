@@ -11,6 +11,8 @@
 
     <artifactId>newmall-api</artifactId>
 
+    <packaging>war</packaging>
+
     <dependencies>
         <dependency>
             <groupId>com.zhangwq</groupId>

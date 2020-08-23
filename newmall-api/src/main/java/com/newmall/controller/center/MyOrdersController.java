@@ -1,7 +1,6 @@
 package com.newmall.controller.center;
 
 import com.newmall.controller.BaseController;
-import com.newmall.pojo.Orders;
 import com.newmall.pojo.vo.OrderStatusCountsVO;
 import com.newmall.service.center.MyOrdersService;
 import com.newmall.utils.JsonResult;

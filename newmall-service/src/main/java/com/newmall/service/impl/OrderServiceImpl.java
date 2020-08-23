@@ -11,6 +11,7 @@ import com.newmall.pojo.OrderItems;
 import com.newmall.pojo.OrderStatus;
 import com.newmall.pojo.Orders;
 import com.newmall.pojo.UserAddress;
+import com.newmall.pojo.bo.ShopcartBO;
 import com.newmall.pojo.bo.SubmitOrderBO;
 import com.newmall.pojo.vo.MerchantOrdersVO;
 import com.newmall.pojo.vo.OrderVO;
@@ -50,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public OrderVO createOrder(SubmitOrderBO submitOrderBO) {
+    public OrderVO createOrder(List<ShopcartBO> shopcartList,SubmitOrderBO submitOrderBO) {
 
         String userId = submitOrderBO.getUserId();
         String addressId = submitOrderBO.getAddressId();
@@ -94,9 +95,9 @@ public class OrderServiceImpl implements OrderService {
         Integer totalAmount = 0;    // 商品原价累计
         Integer realPayAmount = 0;  // 优惠后的实际支付价格累计
         for (String itemSpecId : itemSpecIdArr) {
-
+            ShopcartBO cartItem = getBuyCountsFromShopcart(shopcartList, itemSpecId);
             // TODO 整合redis后，商品购买的数量重新从redis的购物车中获取
-            int buyCounts = 1;
+            int buyCounts = cartItem.getBuyCounts();
 
             // 2.1 根据规格id，查询规格的具体信息，主要获取价格
             ItemsSpec itemSpec = itemService.queryItemSpecById(itemSpecId);
@@ -150,6 +151,21 @@ public class OrderServiceImpl implements OrderService {
         orderVO.setMerchantOrdersVO(merchantOrdersVO);
 
         return orderVO;
+    }
+
+    /**
+     * 从redis中的购物车里获取商品，目的：counts
+     * @param shopcartList
+     * @param specId
+     * @return
+     */
+    private ShopcartBO getBuyCountsFromShopcart(List<ShopcartBO> shopcartList, String specId) {
+        for (ShopcartBO cart : shopcartList) {
+            if (cart.getSpecId().equals(specId)) {
+                return cart;
+            }
+        }
+        return null;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
